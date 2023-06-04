@@ -1,11 +1,23 @@
 import Head from "next/head";
 
-import FilmsList from "../components/FilmsListWithCategories/FilmsListWithCateroties";
+import FilmsList from "../components/FilmsListWithCategory/FilmsListWithCategory";
 
-const Home:NextPage = ({films}) => {
-  console.log('====================================');
-  console.log('films', films);
-  console.log('====================================');
+import { GetServerSideProps, NextPage } from "next";
+import {
+  getTrendingPerson,
+  getTrendingMovie,
+  getTrendingTV,
+} from "@/services/Api";
+import { FilmsResponse } from "@/types";
+import FilmsListWithCategory from "../components/FilmsListWithCategory/FilmsListWithCategory";
+
+const Home: NextPage<any> = ({
+  trendingPeople,
+  trendingMovies,
+  trendingTV,
+}) => {
+  console.log("films", trendingPeople, trendingMovies, trendingTV);
+
   return (
     <>
       <Head>
@@ -15,7 +27,9 @@ const Home:NextPage = ({films}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <FilmsList />
+        <FilmsListWithCategory category='People' films={trendingPeople} />
+        <FilmsListWithCategory category='Movies' films={trendingMovies} />
+        <FilmsListWithCategory category='TV' films={trendingTV}/>
       </main>
     </>
   );
@@ -23,49 +37,26 @@ const Home:NextPage = ({films}) => {
 
 export default Home;
 
-import { GetServerSideProps, NextPage } from 'next';
-import { getTrendingPerson, getTrendingMovie, getTrendingTV } from "@/services/Api";
-
-
-// Define a type for our product data
-type Film = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  category: 'physical' | 'digital';
-};
-
-// Define a type for our props
-interface FilmsProps {
-  films: Film;
-}
-
-// Export the page component
-
-
-// Export the getServerSideProps function with GetServerSideProps type
 export const getServerSideProps: GetServerSideProps<{
-  films: Film;
+  films: any;
 }> = async () => {
- 
-  const results = await Promise.all([getTrendingPerson(), getTrendingMovie(), getTrendingTV()])
+  try {
+    const [trendingPeople, trendingMovies, trendingTV] = await Promise.all([
+      getTrendingPerson(),
+      getTrendingMovie(),
+      getTrendingTV(),
+    ]);
 
-  
-  // // Parse the data
-  // const product = data.product;
-
-  // If the product is not found, return notFound - 404 page
-  // if (product === null) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
-
-  // Return the product as props
-  return {
-    props: {
-      films: results,
-    },
-  };
+    return {
+      props: {
+        trendingPeople: trendingPeople.results,
+        trendingMovies: trendingMovies.results,
+        trendingTV: trendingTV.results,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };
