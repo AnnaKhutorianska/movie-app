@@ -27,7 +27,7 @@ const Home: NextPage<any> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <FilmsListWithCategory category='People' films={trendingPeople} />
+        {/* <FilmsListWithCategory category='People' films={trendingPeople} /> */}
         <FilmsListWithCategory category='Movies' films={trendingMovies} />
         <FilmsListWithCategory category='TV' films={trendingTV}/>
       </main>

@@ -62,6 +62,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "none",
+          height: 70,
         },
         colorDefault: {
           backgroundColor: "red",
@@ -72,6 +73,16 @@ const theme = createTheme({
       styleOverrides: {
         paper: {
           backgroundColor: '#82c0cc',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          width: 240,
+          // height: 300,
+          // borderRadius: "100px",
+          // boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
         },
       },
     },
