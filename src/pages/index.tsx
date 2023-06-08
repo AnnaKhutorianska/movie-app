@@ -10,14 +10,13 @@ import {
 } from "@/services/Api";
 import { FilmsResponse } from "@/types";
 import FilmsListWithCategory from "../components/FilmsListWithCategory/FilmsListWithCategory";
+import { pathes } from "@/path";
 
 const Home: NextPage<any> = ({
   trendingPeople,
   trendingMovies,
   trendingTV,
 }) => {
-  console.log("films", trendingPeople, trendingMovies, trendingTV);
-
   return (
     <>
       <Head>
@@ -28,8 +27,8 @@ const Home: NextPage<any> = ({
       </Head>
       <main>
         {/* <FilmsListWithCategory category='People' films={trendingPeople} /> */}
-        <FilmsListWithCategory category='Movies' films={trendingMovies} />
-        <FilmsListWithCategory category='TV' films={trendingTV}/>
+        <FilmsListWithCategory category='Movies' films={trendingMovies} path={pathes.film}/>
+        <FilmsListWithCategory category='TV' films={trendingTV} path={pathes.tv}/>
       </main>
     </>
   );

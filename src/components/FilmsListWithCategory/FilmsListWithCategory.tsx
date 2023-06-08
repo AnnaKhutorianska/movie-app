@@ -1,31 +1,31 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography, Button } from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
 import FilmCard from "../FilmCard";
-import { path } from "@/path";
+import { pathes } from "@/path";
 
 
 interface FilmsListWithCategoryProps {
   category: string;
   films: any;
+  path: string,
 }
 
 const FilmsListWithCategory: FC<FilmsListWithCategoryProps> = ({
   category,
   films,
+  path,
 }) => {
-  console.log('films', films);
   return (
-
     <>
-      <Link href={`/${category}`}>
-        <Typography>{category}</Typography>
+      <Link href={`/${path}`}>
+        <Button>{category}</Button>
       </Link>
 
-      <Grid container justifyContent="center" alignItems="center" spacing={3}>
+      <Grid container justifyContent='space-between' alignItems="center" spacing={2}>
         {films.map((film) => (
           <Grid item key={film.id}>
-            <Link href={`${path.film}/${film.id}`}>
+            <Link href={`${path}/${film.id}`}>
               <FilmCard film={film}/>
             </Link>
           </Grid>

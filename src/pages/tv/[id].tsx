@@ -1,11 +1,11 @@
-import { getMovieDetails } from "@/services/Api";
+import { getMovieDetails, getTVDetails } from "@/services/Api";
 import { GetServerSideProps, NextPage } from "next";
 
 
-const FilmPage: NextPage = ({ details }) => {
+const TVPage: NextPage = ({ details }) => {
   console.log('details', details);
 
-  return <div>FilmPage</div>;
+  return <div>TVPage</div>;
 };
 
 export const getServerSideProps: GetServerSideProps<{
@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ({ query }) => {
   const { id } = query;
   try {
-    const result = await getMovieDetails(id);
+    const result = await getTVDetails(id);
     return {
       props: {
         details: result,
@@ -26,4 +26,4 @@ export const getServerSideProps: GetServerSideProps<{
   }
 };
 
-export default FilmPage;
+export default TVPage;

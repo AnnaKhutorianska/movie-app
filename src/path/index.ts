@@ -1,4 +1,5 @@
-export const path = {
+export const pathes = {
   home: '/',
-  film: '/film'
+  film: '/film',
+  tv: 'tv',
 }

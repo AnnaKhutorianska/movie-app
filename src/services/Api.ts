@@ -25,3 +25,13 @@ export const getTrendingTV = async () => {
   const { data } = await Api.get("/trending/tv/day");
   return data;
 };
+
+export const getMovieDetails = async (movie_id: string) => {
+  const { data } = await Api.get(`/movie/${movie_id}`);
+  return data;
+};
+
+export const getTVDetails = async (series_id: string) => {
+  const { data } = await Api.get(`/tv/${series_id}`);
+  return data;
+};
