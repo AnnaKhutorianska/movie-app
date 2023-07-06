@@ -19,10 +19,9 @@ const FilmsListWithCategory: FC<FilmsListWithCategoryProps> = ({
   return (
     <>
       <Link href={`/${path}`}>
-        <Button>{category}</Button>
+        <Button variant="contained" color="secondary">{category}</Button>
       </Link>
-
-      <Grid container justifyContent='space-between' alignItems="center" spacing={2}>
+      <Grid container justifyContent='space-between' alignItems="center" spacing={2} my={2}>
         {films.map((film) => (
           <Grid item key={film.id}>
             <Link href={`${path}/${film.id}`}>

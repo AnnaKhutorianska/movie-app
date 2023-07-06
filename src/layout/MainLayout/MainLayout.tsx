@@ -58,7 +58,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const MainLayout: FC = ({ children }) => {
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState<boolean>(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -71,22 +71,6 @@ const MainLayout: FC = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {/* <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            {open ? <FormatIndentDecreaseIcon /> : <FormatIndentIncreaseIcon />}
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
       <Header open={open} handleDrawerOpen={handleDrawerOpen} />
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />
       <Main open={open}>

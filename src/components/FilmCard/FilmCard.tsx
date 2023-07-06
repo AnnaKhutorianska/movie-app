@@ -9,30 +9,29 @@ import {
   Typography,
 } from "@mui/material";
 import Poster from "../Poster/Poster";
+import { useAppSelector } from "@/state/hooks";
+import { getGenreType } from "@/utils";
 
 const FilmCard: FC<any> = ({ film }) => {
-  console.log("====================================");
-  console.log("film", film);
-  console.log("====================================");
+  const genres = useAppSelector((state) => state.genres);
+
+  console.log(film);
   return (
     <Paper>
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia sx={{ position: "relative" }}>
-          <Poster
-            img={film.poster_path}
-            style={{ objectFit: "cover" }}
-          />
+          <Poster img={film.poster_path} style={{ objectFit: "cover" }} />
         </CardMedia>
         <CardContent>
           {/* <Typography component="div">
             {film.name}
           </Typography> */}
-          <Typography>
-            {film.name || film.title}
-          </Typography>
-          <Typography>
-
-          </Typography>
+          <Typography variant="subtitle2">{film.name || film.title}</Typography>
+          {getGenreType(genres, film.media_type, film.genre_ids)?.map(
+            (genre) => (
+              <Typography key={genre}>{genre}</Typography>
+            )
+          )}
         </CardContent>
         <CardActions>
           <Button size="small">Watch later</Button>

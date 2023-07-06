@@ -7,6 +7,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { DrawerHeader } from "./Drawer.styles";
 import Filters from "@/components/Filters";
+import FormatIndentDecreaseIcon from "@mui/icons-material/FormatIndentDecrease";
 
 interface DrawerProps {
   open: boolean;
@@ -28,8 +29,16 @@ const Drawer: FC<DrawerProps> = ({ open, handleDrawerClose }) => {
       open={open}
     >
       <DrawerHeader>
-        <Typography> App </Typography>
-        <IconButton onClick={handleDrawerClose}>
+        <img src="/tickets.png" alt='ticket-logo'/>
+        <Typography> Movies&TV </Typography>
+      
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerClose}
+          edge="start"
+        >
+         <FormatIndentDecreaseIcon />
         </IconButton>
       </DrawerHeader>
       <Divider />

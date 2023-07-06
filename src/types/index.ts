@@ -24,3 +24,8 @@ export interface FilmsResponse {
   total_pages: number;
   total_results: number;
 }
+
+export enum MediaType {
+  TV = 'tv',
+  MOVIE = 'movie'
+}

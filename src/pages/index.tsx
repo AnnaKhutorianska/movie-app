@@ -1,22 +1,20 @@
 import Head from "next/head";
 
-import FilmsList from "../components/FilmsListWithCategory/FilmsListWithCategory";
-
 import { GetServerSideProps, NextPage } from "next";
 import {
-  getTrendingPerson,
   getTrendingMovie,
   getTrendingTV,
+  getGenresMovie,
+  getGenresTV,
 } from "@/services/Api";
 import { FilmsResponse } from "@/types";
 import FilmsListWithCategory from "../components/FilmsListWithCategory/FilmsListWithCategory";
 import { pathes } from "@/path";
+import { Divider } from "@mui/material";
+import { store, wrapper } from "@/state/store";
+import { genresFetch } from "@/state/modules/genres/actions";
 
-const Home: NextPage<any> = ({
-  trendingPeople,
-  trendingMovies,
-  trendingTV,
-}) => {
+const Home: NextPage<any> = ({ trendingMovies, trendingTV }) => {
   return (
     <>
       <Head>
@@ -26,9 +24,16 @@ const Home: NextPage<any> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* <FilmsListWithCategory category='People' films={trendingPeople} /> */}
-        <FilmsListWithCategory category='Movies' films={trendingMovies} path={pathes.film}/>
-        <FilmsListWithCategory category='TV' films={trendingTV} path={pathes.tv}/>
+        <FilmsListWithCategory
+          category="Movies"
+          films={trendingMovies}
+          path={pathes.film}
+        />
+        <FilmsListWithCategory
+          category="TV"
+          films={trendingTV}
+          path={pathes.tv}
+        />
       </main>
     </>
   );
@@ -38,17 +43,17 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps<{
   films: any;
-}> = async () => {
+}> = wrapper.getServerSideProps((store) => async () => {
   try {
-    const [trendingPeople, trendingMovies, trendingTV] = await Promise.all([
-      getTrendingPerson(),
+    const [trendingMovies, trendingTV] = await Promise.all([
       getTrendingMovie(),
       getTrendingTV(),
     ]);
 
+    await store.dispatch(genresFetch());
+
     return {
       props: {
-        trendingPeople: trendingPeople.results,
         trendingMovies: trendingMovies.results,
         trendingTV: trendingTV.results,
       },
@@ -58,4 +63,4 @@ export const getServerSideProps: GetServerSideProps<{
       notFound: true,
     };
   }
-};
+});

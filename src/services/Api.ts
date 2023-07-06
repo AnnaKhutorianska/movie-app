@@ -35,3 +35,13 @@ export const getTVDetails = async (series_id: string) => {
   const { data } = await Api.get(`/tv/${series_id}`);
   return data;
 };
+
+export const getGenresMovie = async () => {
+  const { data } = await Api.get('/genre/movie/list?language=en')
+  return data;
+}
+
+export const getGenresTV = async () => {
+  const { data } = await Api.get('/genre/tv/list?language=en')
+  return data;
+}

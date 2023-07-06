@@ -4,17 +4,17 @@ import { createTheme } from "@mui/material";
 
 export const palette = {
   primary: {
-    main: "#1F293D",
+    main: "#adb5bd",
   },
   secondary: {
-    main: "#ffa62b",
+    main: "#f5cb5c",
   },
   text: {
     primary: "#1F293D",
     secondary: "#828282",
   },
   background: {
-    main: "#1F293D",
+    // main: "#4f518c",
     paper: "#fff",
     default: "#FBFDFF",
   },
@@ -63,16 +63,14 @@ const theme = createTheme({
         root: {
           boxShadow: "none",
           height: 70,
-        },
-        colorDefault: {
-          backgroundColor: "red",
+          // backgroundColor: 'red'
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: '#82c0cc',
+          backgroundColor: '#adb5bd',
         },
       },
     },
