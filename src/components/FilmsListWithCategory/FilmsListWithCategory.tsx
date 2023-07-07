@@ -1,14 +1,19 @@
-import { Grid, Paper, Typography, Button } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  Link as MuiLink,
+} from "@mui/material";
 import Link from "next/link";
 import { FC } from "react";
 import FilmCard from "../FilmCard";
 import { pathes } from "@/path";
 
-
 interface FilmsListWithCategoryProps {
   category: string;
   films: any;
-  path: string,
+  path: string;
 }
 
 const FilmsListWithCategory: FC<FilmsListWithCategoryProps> = ({
@@ -19,14 +24,30 @@ const FilmsListWithCategory: FC<FilmsListWithCategoryProps> = ({
   return (
     <>
       <Link href={`/${path}`}>
-        <Button variant="contained" color="secondary">{category}</Button>
+        <Button variant="contained" color="secondary">
+          {category}
+        </Button>
       </Link>
-      <Grid container justifyContent='space-between' alignItems="center" spacing={2} my={2}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="stretch"
+        spacing={2}
+        my={2}
+      >
         {films.map((film) => (
           <Grid item key={film.id}>
-            <Link href={`${path}/${film.id}`}>
-              <FilmCard film={film}/>
-            </Link>
+            <MuiLink
+              href={`${path}/${film.id}`}
+              component={Link}
+              sx={{
+                height: "100%",
+                display: "inline-block",
+                textDecoration: "none",
+              }}
+            >
+              <FilmCard film={film} />
+            </MuiLink>
           </Grid>
         ))}
       </Grid>

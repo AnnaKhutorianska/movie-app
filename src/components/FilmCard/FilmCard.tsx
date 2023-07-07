@@ -2,42 +2,43 @@ import { FC } from "react";
 import {
   Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
-  Paper,
+  Stack,
   Typography,
 } from "@mui/material";
 import Poster from "../Poster/Poster";
-import { useAppSelector } from "@/state/hooks";
-import { getGenreType } from "@/utils";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-const FilmCard: FC<any> = ({ film }) => {
-  const genres = useAppSelector((state) => state.genres);
+interface FilmCardProps {
+  film: any;
+}
 
-  console.log(film);
+const FilmCard: FC<FilmCardProps> = ({ film }) => {
   return (
-    <Paper>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia sx={{ position: "relative" }}>
-          <Poster img={film.poster_path} style={{ objectFit: "cover" }} />
-        </CardMedia>
-        <CardContent>
-          {/* <Typography component="div">
-            {film.name}
-          </Typography> */}
-          <Typography variant="subtitle2">{film.name || film.title}</Typography>
-          {getGenreType(genres, film.media_type, film.genre_ids)?.map(
-            (genre) => (
-              <Typography key={genre}>{genre}</Typography>
-            )
-          )}
-        </CardContent>
-        <CardActions>
+    <Card sx={{ height: "100%" }}>
+      <CardMedia sx={{ position: "relative" }}>
+        <Poster img={film.poster_path} style={{ objectFit: "cover" }} />
+      </CardMedia>
+      <CardContent >
+        <Typography variant="subtitle2" sx={{minHeight: 90}}>{film.name || film.title}</Typography>
+        <Stack
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Stack
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <StarBorderIcon color="secondary"/>
+            <Typography ml={1}>{film.vote_average}</Typography>
+          </Stack>
           <Button size="small">Watch later</Button>
-        </CardActions>
-      </Card>
-    </Paper>
+        </Stack>
+      </CardContent>
+    </Card>
   );
 };
 

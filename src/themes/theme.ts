@@ -32,16 +32,15 @@ const theme = createTheme({
   typography: {
     fontFamily: "Oxygen",
     subtitle1: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: 700,
       [defaultTheme.breakpoints.up("md")]: {
-        fontSize: 18,
+        fontSize: 20,
       },
     },
     subtitle2: {
-      fontSize: 17,
+      fontSize: 16,
       fontWeight: 700,
-      marginBottom: defaultTheme.spacing(1.5),
       [defaultTheme.breakpoints.up("md")]: {
         fontSize: 18,
       },
@@ -78,7 +77,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           width: 240,
-          height: 450,
+          // height: 450,
           // borderRadius: "100px",
           // boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
         },
