@@ -27,7 +27,7 @@ const Home: NextPage<any> = ({ trendingMovies, trendingTV }) => {
         <FilmsListWithCategory
           category="Movies"
           films={trendingMovies}
-          path={pathes.film}
+          path={pathes.movie}
         />
         <FilmsListWithCategory
           category="TV"

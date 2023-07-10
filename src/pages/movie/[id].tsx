@@ -6,24 +6,24 @@ import { Box, Stack, Typography } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 
 const FilmPage: NextPage = ({ details }) => {
-  console.log("details", details);
-  const genres = useAppSelector((state) => state.genres.tvGenres);
+  // console.log("details", details);
+  // const genres = useAppSelector((state) => state.genres.tvGenres);
   // getGenreType(genres, film.media_type, film.genre_ids)
   return (
     <>
-      <Typography variant="subtitle1">{details.original_title}</Typography>
+      <Typography variant="subtitle1" mb={2}>{details.original_title}</Typography>
       <Stack flexDirection="row">
         <Poster
           img={details.poster_path}
           style={{ width: "400px", height: "500px" }}
         />
-        <Stack>
+        <Stack spacing={2} ml={2}>
           <Box>
-            <Typography>Date:</Typography>
+            <Typography variant="body2">Date:</Typography>
             <Typography variant="body1">{details.release_date}</Typography>
           </Box>
           <Box>
-            <Typography>Country:</Typography>
+            <Typography variant="body2">Country:</Typography>
             {details.production_countries.map((country) => (
               <Typography key={country.name} variant="body1">
                 {country.name}
@@ -31,19 +31,19 @@ const FilmPage: NextPage = ({ details }) => {
             ))}
           </Box>
           <Box>
-            <Typography>Genre:</Typography>
+            <Typography variant="body2">Genre:</Typography>
             {details.genres.map((genre) => (
               <Typography key={genre.id}>{genre.name}</Typography>
             ))}
           </Box>
           <Box>
-            <Typography>Duration:</Typography>
+            <Typography variant="body2">Duration:</Typography>
             <Typography variant="body1">{details.runtime}</Typography>
           </Box>
         </Stack>
       </Stack>
         <Box>
-          <Typography>Story:</Typography>
+          <Typography variant="body2">Story:</Typography>
           <Typography variant="body1">{details.overview}</Typography>
         </Box>
     </>

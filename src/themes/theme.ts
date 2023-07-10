@@ -53,7 +53,7 @@ const theme = createTheme({
     },
     body2: {
       fontSize: 16,
-      marginBottom: defaultTheme.spacing(1),
+      fontWeight: 600,
     },
   },
   components: {

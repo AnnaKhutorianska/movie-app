@@ -23,7 +23,7 @@ const FilmsListWithCategory: FC<FilmsListWithCategoryProps> = ({
 }) => {
   return (
     <>
-      <Link href={`/${path}`}>
+      <Link href={{ pathname: `${pathes.movie}`, query: { page: 1 } }}>
         <Button variant="contained" color="secondary">
           {category}
         </Button>

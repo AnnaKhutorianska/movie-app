@@ -1,5 +1,6 @@
 export const pathes = {
   home: '/',
-  film: '/film',
+  movies: '/movies',
+  movie: 'movie',
   tv: 'tv',
 }

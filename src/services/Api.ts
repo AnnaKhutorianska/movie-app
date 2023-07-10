@@ -45,3 +45,8 @@ export const getGenresTV = async () => {
   const { data } = await Api.get('/genre/tv/list?language=en')
   return data;
 }
+
+export const getMovies = async (page: number) => {
+  const { data } = await Api.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`)
+  return data;
+}

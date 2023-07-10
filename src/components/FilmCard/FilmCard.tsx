@@ -18,7 +18,7 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
   return (
     <Card sx={{ height: "100%" }}>
       <CardMedia sx={{ position: "relative" }}>
-        <Poster img={film.poster_path} style={{ objectFit: "cover" }} />
+        <Poster img={film.poster_path} style={{ objectFit: "contain" }} />
       </CardMedia>
       <CardContent >
         <Typography variant="subtitle2" sx={{minHeight: 90}}>{film.name || film.title}</Typography>
