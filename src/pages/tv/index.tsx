@@ -1,27 +1,27 @@
 import MovieList from "@/components/MovieList/MovieList";
 import { pathes } from "@/path";
-import { getMovies } from "@/services/Api";
+import { getTVs } from "@/services/Api";
 import { Pagination, Stack } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 
-const MoviesPage: NextPage = ({ movies }) => {
+const MoviesPage: NextPage = ({ tvs }) => {
   const router = useRouter();
 
-  console.log(movies);
+  // console.log(tvs);
   return (
     <>
-      <MovieList movies={movies.results} />
+      <MovieList movies={tvs.results} path={pathes.tv}/>
       <Stack alignItems="center">
         <Pagination
-          count={movies.total_pages}
+          count={tvs.total_pages}
           color="secondary"
           size="large"
           boundaryCount={2}
-          page={movies.page}
+          page={tvs.page}
           onChange={(e, value) =>
             router.replace({
-              pathname: `${pathes.movie}`,
+              pathname: `${pathes.tv}`,
               query: { page: value },
             })
           }
@@ -36,10 +36,10 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ({ query }) => {
   const { page } = query;
   try {
-    const result = await getMovies(page);
+    const result = await getTVs(page);
     return {
       props: {
-        movies: result,
+        tvs: result,
       },
     };
   } catch (error) {

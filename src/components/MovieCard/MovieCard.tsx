@@ -10,18 +10,18 @@ import {
 import Poster from "../Poster/Poster";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-interface FilmCardProps {
-  film: any;
+interface MovieCardProps {
+  movie: any;
 }
 
-const FilmCard: FC<FilmCardProps> = ({ film }) => {
+const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   return (
     <Card sx={{ height: "100%" }}>
       <CardMedia sx={{ position: "relative" }}>
-        <Poster img={film.poster_path} style={{ objectFit: "contain" }} />
+        <Poster img={movie.poster_path} style={{ objectFit: "contain" }} />
       </CardMedia>
       <CardContent >
-        <Typography variant="subtitle2" sx={{minHeight: 90}}>{film.name || film.title}</Typography>
+        <Typography variant="subtitle2" sx={{minHeight: 90}}>{movie.name || movie.title}</Typography>
         <Stack
           flexDirection="row"
           justifyContent="space-between"
@@ -33,7 +33,7 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
             alignItems="center"
           >
             <StarBorderIcon color="secondary"/>
-            <Typography ml={1}>{film.vote_average}</Typography>
+            <Typography ml={1}>{movie.vote_average}</Typography>
           </Stack>
           <Button size="small">Watch later</Button>
         </Stack>
@@ -42,4 +42,4 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
   );
 };
 
-export default FilmCard;
+export default MovieCard;

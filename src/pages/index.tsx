@@ -8,11 +8,12 @@ import {
   getGenresTV,
 } from "@/services/Api";
 import { FilmsResponse } from "@/types";
-import FilmsListWithCategory from "../components/FilmsListWithCategory/FilmsListWithCategory";
+import FilmsListWithCategory from "../components/MovieListWithCategory/MovieListWithCategory";
 import { pathes } from "@/path";
 import { Divider } from "@mui/material";
 import { store, wrapper } from "@/state/store";
 import { genresFetch } from "@/state/modules/genres/actions";
+import MovieListWithCategory from "../components/MovieListWithCategory/MovieListWithCategory";
 
 const Home: NextPage<any> = ({ trendingMovies, trendingTV }) => {
   return (
@@ -24,14 +25,14 @@ const Home: NextPage<any> = ({ trendingMovies, trendingTV }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <FilmsListWithCategory
+        <MovieListWithCategory
           category="Movies"
-          films={trendingMovies}
+          movies={trendingMovies}
           path={pathes.movie}
         />
-        <FilmsListWithCategory
+        <MovieListWithCategory
           category="TV"
-          films={trendingTV}
+          movies={trendingTV}
           path={pathes.tv}
         />
       </main>
@@ -42,7 +43,7 @@ const Home: NextPage<any> = ({ trendingMovies, trendingTV }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps<{
-  films: any;
+  movies: any;
 }> = wrapper.getServerSideProps((store) => async () => {
   try {
     const [trendingMovies, trendingTV] = await Promise.all([

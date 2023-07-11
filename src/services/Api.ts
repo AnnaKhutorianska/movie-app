@@ -50,3 +50,9 @@ export const getMovies = async (page: number) => {
   const { data } = await Api.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`)
   return data;
 }
+
+export const getTVs = async (page: number) => {
+  const { data } = await Api.get(`/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc`)
+  return data;
+}
+
