@@ -29,7 +29,7 @@ const Drawer: FC<DrawerProps> = ({ open, handleDrawerClose }) => {
       open={open}
     >
       <DrawerHeader>
-        <img src="/tickets.png" alt='ticket-logo'/>
+        {/* <img src="/tickets.png" alt='ticket-logo'/> */}
         <Typography> Movies&TV </Typography>
       
         <IconButton
@@ -42,20 +42,10 @@ const Drawer: FC<DrawerProps> = ({ open, handleDrawerClose }) => {
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <Filters filters={["All", "Movies", "People", "TV"]} />
+      {/* <Filters filters={["All", "Movies", "People", "TV"]} /> */}
       <Divider />
-      <List>
-        {["Favorits", "Compare", "Account"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Typography>Home</Typography>
+      <Typography>Watch later</Typography>
       <Divider />
     </MuiDrawer>
   );
