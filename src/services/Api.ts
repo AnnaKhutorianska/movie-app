@@ -56,3 +56,8 @@ export const getTVs = async (page: number) => {
   return data;
 }
 
+export const search = async (searchString: string) => {
+  const { data } = await Api.get(`/search/multi?query=${searchString}`)
+  return data;
+}
+
