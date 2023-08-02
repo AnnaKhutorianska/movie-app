@@ -3,4 +3,5 @@ export const pathes = {
   movies: '/movies',
   movie: 'movie',
   tv: 'tv',
+  person: 'person'
 }

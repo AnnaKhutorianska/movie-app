@@ -1,14 +1,9 @@
 import Poster from "@/components/Poster";
 import { getMovieDetails } from "@/services/Api";
-import { useAppSelector } from "@/state/hooks";
-import { getGenreType } from "@/utils";
 import { Box, Stack, Typography } from "@mui/material";
 import { GetServerSideProps, NextPage } from "next";
 
 const FilmPage: NextPage = ({ details }) => {
-  // console.log("details", details);
-  // const genres = useAppSelector((state) => state.genres.tvGenres);
-  // getGenreType(genres, film.media_type, film.genre_ids)
   return (
     <>
       <Typography variant="subtitle1" mb={2}>{details.original_title}</Typography>

@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEventHandler, FC, useEffect, useState } from "react";
 import {
   Autocomplete,
   Box,
-  FormControl,
+  Divider,
+  InputAdornment,
   MenuItem,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { SearchOutlined } from "@mui/icons-material";
-import { useDebounce, useDebouncedCallback } from "use-debounce";
+import { useDebouncedCallback } from "use-debounce";
 import { search } from "@/services/Api";
 import Poster from "@/components/Poster/Poster";
-import { log } from "console";
+import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from "next/router";
 
 const Search: FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -25,6 +26,7 @@ const Search: FC = () => {
   };
 
   const debounced = useDebouncedCallback(fetchData, 2000);
+  const router = useRouter();
 
   useEffect(() => {
     debounced();
@@ -33,40 +35,44 @@ const Search: FC = () => {
 
   return (
     <Box sx={{ width: "100%", ml: { xs: 0, md: 1 } }}>
-      <FormControl sx={{ width: { xs: "100%", md: 224 } }}>
-        {/* <OutlinedInput
-          value={searchValue}
-          size="small"
-          id="header-search"
-          startAdornment={
-            <InputAdornment position="start" sx={{ mr: -0.5 }}>
-              <SearchOutlined />
-            </InputAdornment>
-          }
-          aria-describedby="header-search-text"
-          inputProps={{
-            "aria-label": "weight",
-          }}
-          placeholder="Search"
-          onChange={(e) => setSearchValue(e.target.value)}
-        /> */}
-      </FormControl>
-
       <Autocomplete
+        id="free-solo-demo"
+        freeSolo
         options={searchOptions}
-        // onClose={() => setSearchOptions([])}
-        getOptionLabel={option => option.name ?? option.title}
+        onClose={() => setSearchOptions([])}
+        getOptionLabel={(option) => option.name ?? option.title}
+        sx={{ width: 500 }}
         renderOption={(props, option) => {
           return (
-            <MenuItem key={option.id}>
-              <Stack>
-                <Typography>{option.name || option.title}</Typography>
-                <Box>
+            <MenuItem
+              sx={{ flexDirection: "column", alignItems: "start" }}
+              key={option.id}
+              onClick={() =>
+                router.push(`/${[option.media_type]}/${option.id}`)
+              }
+            >
+              <Typography>{option.name || option.title}</Typography>
+              <Stack flexDirection="row">
+                {option.poster_path && (
                   <Poster
                     img={option.poster_path}
-                    style={{ height: 50, width: 50 }}
+                    style={{ height: 50, width: 50, marginRight: 10 }}
                   />
-                  <Typography>{option.first_air_date}</Typography>
+                )}
+
+                <Box>
+                  <Stack flexDirection="row">
+                    <Typography>Category: </Typography>
+                    <Typography>{option.media_type}</Typography>
+                  </Stack>
+                  {(option.first_air_date || option.release_date) && (
+                    <Stack flexDirection="row">
+                      <Typography>Air date: </Typography>
+                      <Typography>
+                        {option.first_air_date || option.release_date}
+                      </Typography>
+                    </Stack>
+                  )}
                 </Box>
               </Stack>
             </MenuItem>
@@ -75,11 +81,21 @@ const Search: FC = () => {
         renderInput={(params) => (
           <TextField
             {...params}
-            variant="standard"
-            label="Multiple values"
-            placeholder="Favorites"
+            margin="normal"
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={(e: ChangeEventHandler<HTMLInputElement>) =>
+              setSearchValue(e.target.value)
+            }
+            color="secondary"
+            placeholder="Search"
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon color="secondary" />
+                </InputAdornment>
+              ),
+            }}
           />
         )}
       />

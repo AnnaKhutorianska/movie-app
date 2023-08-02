@@ -2,7 +2,6 @@ import { FC } from "react"
 import Link from "next/link"
 import { Grid, Link as MuiLink } from "@mui/material"
 import MovieCard from "../MovieCard"
-import { pathes } from "@/path"
 
 interface MovieListProps {
   movies: any
